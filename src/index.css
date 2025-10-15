@@ -6,6 +6,10 @@
   font-family: Monserrat;
 }
 
+main{
+  margin: 9rem 3rem;
+}
+
 /*Navbar*/
 nav {
   background-color:rgba(224, 55, 128, 0.652);
@@ -66,3 +70,48 @@ nav a:hover {
    transform: translate(-80%, -50%);
    font-size: 2rem;
 }
+
+/*Footer*/
+footer {
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  background-color: rgb(112, 183, 216);
+ 
+}
+
+footer ul {
+  list-style: none;
+  display: inline-flex;
+  gap: 2rem;
+  margin: auto 4rem auto auto;
+  align-items: center;
+}
+
+/*Productos*/
+
+#product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+#product-list li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(216, 120, 162, 0.652);
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-img{
+  width: 50%;
+  height: 50%;
+  border-radius: 2px;
+  
+}
+
+/* Modificar estilo de los botones para que queden similar. componente boton? */
