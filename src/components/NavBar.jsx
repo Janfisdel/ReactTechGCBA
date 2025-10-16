@@ -5,11 +5,13 @@ function Navbar() {
   return (
     <nav>
       <div className="divLogo">
+        <Link to={`/`}>
+        
         <img
           className="logo"
           src="https://res.cloudinary.com/janfis/image/upload/v1747698402/GCBA%20-%20Front/earth_jxdslq.png"
           alt="logo"
-        />
+        /></Link>
       </div>
       <div>
         <h1 className='titulo'>TIENDA TLV</h1>

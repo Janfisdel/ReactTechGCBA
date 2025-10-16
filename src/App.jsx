@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/navBar'
 import Footer from './components/Footer'
 import Products from './components/Products'
+import Inicio from './components/Inicio'
 
 
 
@@ -13,7 +14,8 @@ function App() {
      <Navbar />
      <main>
       <Routes>
-        <Route path='/' element={<Products />} />
+        <Route path="/" element={<Inicio />} />
+        <Route path='/productos' element={<Products />} />
      </Routes>
      </main>
      

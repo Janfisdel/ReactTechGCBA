@@ -37,7 +37,7 @@ function Products() {
                 <br />
                 <p>{product.description} </p>
                 <br />
-                <p>{product.price} </p>
+                <p>$ {product.price} </p>
                 <br />
                 <img className="product-img" src={product.img} alt={product.name}/>
                 <Link to={`/productos/${product.category || 'sin-categoria'}/${product.id}`} state={{product}}><button>Más detalles</button></Link>
