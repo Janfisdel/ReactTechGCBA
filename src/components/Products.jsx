@@ -1,5 +1,7 @@
 import {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import Cart from './Cart';
+import Button from './Button';
 
 function Products() {
       const [products, setProducts] = useState([]);
@@ -40,12 +42,13 @@ function Products() {
                 <p>$ {product.price} </p>
                 <br />
                 <img className="product-img" src={product.img} alt={product.name}/>
-                <Link to={`/productos/${product.category || 'sin-categoria'}/${product.id}`} state={{product}}><button>Más detalles</button></Link>
-               <button onClick={()=>agregarCarrito(product)}>Agregar al carrito</button>
+                <Link to={`/productos/${product.category || 'sin-categoria'}/${product.id}`} state={{product}}><Button text="Más detalles" /></Link>
+               <Button  text="Agregar al carrito" onClick={()=>agregarCarrito(product)}/>
                </li> 
                 ))}
 
         </ul>
+                <Cart cart={cart} setCart={setCart} />
     </>
   )
 }

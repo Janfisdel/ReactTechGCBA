@@ -9,7 +9,7 @@ function Navbar() {
         
         <img
           className="logo"
-          src="https://res.cloudinary.com/janfis/image/upload/v1747698402/GCBA%20-%20Front/earth_jxdslq.png"
+          src="https://res.cloudinary.com/janfis/image/upload/v1760717417/GCBAReact/TLVlogo_tmglgl.jpg"
           alt="logo"
         /></Link>
       </div>

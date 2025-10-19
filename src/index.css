@@ -7,12 +7,22 @@
 }
 
 main{
-  margin: 9rem 3rem;
+  margin: 9rem;
 }
 
+.btn {
+  background-color: rgba(225, 95, 151, 0.652);;
+  padding:0.5rem;
+  font-weight: 400;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;  
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.534);
+  color:rgb(3, 19, 3);
+  margin: 5px;
+}
 /*Navbar*/
 nav {
-  background-color:rgba(224, 55, 128, 0.652);
+  background-color:rgb(212, 125, 163);
   padding: 1rem 2rem;
   box-shadow: 0px 0px 2px 1px black;
   display: flex;
@@ -56,8 +66,8 @@ nav a:hover {
   padding: 0.2rem 0 0 0.5rem;
 }
 .logo {
-  width: 4rem;
-  height: 4rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   padding: 0.3rem;
   float: left;
@@ -76,7 +86,7 @@ footer {
   width: 100%;
   text-align: center;
   bottom: 0;
-  background-color: rgb(112, 183, 216);
+  background-color: rgb(212, 125, 163);
  
 }
 
@@ -116,13 +126,14 @@ footer ul {
 
 /* Modificar estilo de los botones para que queden similar. componente boton? */
 
-/* Contenedor del carrusel */
+/* Inicio*/
   .carousel {
     position: relative;
     width: 100%;
     max-width: 1200px;
     margin: auto;
     overflow: hidden;
+    margin-bottom: 2rem;
   }
 
   /* Slides */

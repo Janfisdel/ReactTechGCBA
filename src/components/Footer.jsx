@@ -3,11 +3,7 @@ import React from 'react'
 function Footer() {
   return (
     <footer>
-       <ul>
-        <li>Facebook</li>
-        <li>Instagram</li>
-        <li>Tik Tok</li>
-      </ul>
+       <p>Creado por Jana Daniela Fisdel</p>
         
     </footer>
   )

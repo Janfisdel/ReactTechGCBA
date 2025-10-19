@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useParams, useLocation } from "react-router-dom";
+import Button from './Button';
 
 function ProductsDetail() {
     const {id} =useParams()
@@ -12,6 +13,7 @@ function ProductsDetail() {
                  <p>No se pudo cargar el producto</p>
         <Link to="/productos">
           <button>Volver a Productos</button>
+           <Button  text="Volver a Productos"/>
         </Link>
             </div>
         )
@@ -24,8 +26,8 @@ function ProductsDetail() {
         <img className="product-img" src={product.img} alt={product.name}/>
         <p>{product.description}</p>
         <p>{product.price}</p>
-        <button>Agregar al carrito</button>
-        <Link to="/productos"><button>Volver</button></Link>
+         <Button  text="Agregar al carrito"/>
+        <Link to="/productos"><Button  text="Volver"/></Link>
     </div>
   )
 }
