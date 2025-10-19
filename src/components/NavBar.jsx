@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
 function Navbar() {
+
   return (
     <nav>
       <div className="divLogo">
@@ -17,10 +19,9 @@ function Navbar() {
         <h1 className='titulo'>TIENDA TLV</h1>
       </div>
         <ul>
+            <Link to={`/productos`}>  <li>Productos</li></Link>
+            <Link to= {`/iniciar-sesion`}><li>Iniciar sesión</li></Link>
             
-            <li>Productos</li>
-            <li>Carrito</li>
-            <li>Iniciar sesión</li>
         </ul>
     </nav>
   )
