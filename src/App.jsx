@@ -5,17 +5,17 @@ import Footer from './components/Footer'
 import Products from './components/Products'
 import Inicio from './components/Inicio'
 import ProductsDetail from './components/ProductsDetail'
+import Cart from './components/Cart'
 import RutaProtegida from './components/RutaProtegida'
 import Pagar from './components/Pagar'
 import IniciarSesion from './components/IniciarSesion'
-
+import { AppProvider } from './context/AppContext'
 
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [usuario, setUsuario] = useState({nombre:"", email:""})
-
+ 
   return (
+    <AppProvider>    
    <>
      <Navbar />
      <main>
@@ -23,9 +23,10 @@ function App() {
         <Route path="/" element={<Inicio />} />
         <Route path='/productos' element={<Products />} />
         <Route path='/productos/:categoria/:id' element={<ProductsDetail />} />
-       <Route path="/iniciar-sesion" element={<IniciarSesion setIsAuthenticated={setIsAuthenticated} setUsuario={setUsuario}/>}/>
-        <Route path="/pagar" element={ <RutaProtegida isAuthenticated={isAuthenticated}>
-                <Pagar setIsAuthenticated={setIsAuthenticated} setUsuario={setUsuario} usuario={usuario} />
+       <Route path="/iniciar-sesion" element={<IniciarSesion />}/>
+       <Route path="/carrito" element={<Cart />}  />
+        <Route path="/pagar" element={ <RutaProtegida>
+                <Pagar/>
             </RutaProtegida>
           }
         />
@@ -34,6 +35,7 @@ function App() {
      
     <Footer/>
    </>
+   </AppProvider>
   )
 }
 

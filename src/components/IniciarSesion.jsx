@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Button from './Button'
+import { useAppContext } from '../context/AppContext'
 
-function IniciarSesion({setIsAuthenticated, setUsuario}) {
+function IniciarSesion() {
     const navigate = useNavigate()
     const ubicacion = useLocation()
+
+    const {setIsAuthenticated, setUsuario} = useAppContext()
 
     const [formulario, setFormulario] = useState({nombre:'', email: ''})
 
@@ -33,8 +36,8 @@ function IniciarSesion({setIsAuthenticated, setUsuario}) {
             <input type="email" placeholder='Email'
             value={formulario.email} onChange={(e)=>setFormulario({... formulario, email:e.target.value})} required />
 
-        <Button type={"submit"} text="Iniciar sesión" />
-        <Button onClick={()=>navigate('/productos')} text="Cancelar" />
+            <Button type={"submit"} text="Iniciar sesión" />
+            <Button onClick={()=>navigate('/productos')} text="Cancelar" />
         </form>
    </div>
   )

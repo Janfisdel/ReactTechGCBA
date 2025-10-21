@@ -1,12 +1,12 @@
 import React from 'react';
 import Button from './Button';
 import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext';
 
-export default function Cart({ cart, setCart }) {
+export default function Cart() {
+  const {cart, vaciarCarrito, isAuthenticated, eliminarDelCarrito} =useAppContext()
   const navigate = useNavigate()
-  const vaciarCarrito = () => {
-    setCart([]);
-  };
+ 
 
   const irAPagar = ()=>{
     navigate("/pagar", {state:{cart}}
@@ -23,7 +23,7 @@ export default function Cart({ cart, setCart }) {
         <>
           {cart.map((item) => (
             <div key={item.id}>
-              {item.name} - ${Number(item.price)}
+              <img src={item.img} alt={item.name} width="60" /> - {item.name} - ${Number(item.price)} 
             </div>
           ))}
 

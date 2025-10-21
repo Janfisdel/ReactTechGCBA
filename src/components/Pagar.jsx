@@ -1,18 +1,14 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useAppContext } from '../context/AppContext';
 import Button from './Button'
 
-export default function Pagar({
-  isAuthenticated,
-  setIsAuthenticated,
-  usuario,
-  setUsuario,
-}) {
+export default function Pagar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Datos del carrito
-  const cart = location.state?.cart || [];
+  const {usuario, cerrarSesion, cart, vaciarCarrito} = useAppContext()
+
   // Calculo del total
   const total = cart.reduce(
     (suma, producto) => suma + Number(producto.price),
@@ -23,12 +19,7 @@ export default function Pagar({
   const comprar = () => {
     alert("¡Compra realizada con éxito!");
     navigate("/productos");
-  };
-
-  // Función para cerrar sesión
-  const cerrarSesion = () => {
-    setIsAuthenticated(false);
-    setUsuario({ nombre: "", email: "" });
+    vaciarCarrito()
   };
 
   return (

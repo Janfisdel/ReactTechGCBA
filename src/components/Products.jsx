@@ -2,13 +2,14 @@ import {useState, useEffect} from 'react'
 import { Link} from 'react-router-dom'
 import Cart from './Cart';
 import Button from './Button';
+import { useAppContext } from '../context/AppContext';
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-  const [cart, setCart] = useState([]);
-
+  
+  const {agregarCarrito} = useAppContext()
 
   useEffect( ()=>{
     fetch("https://68d876bf2144ea3f6da823e1.mockapi.io/api/tiendaTLV")
@@ -24,10 +25,7 @@ function Products() {
         })
         },[])
 
-        const agregarCarrito = (product)=>{
-            setCart([...cart, product])
-            alert(`Producto ${product.name} agregado al carrito`)
-        }
+        
 
         if (cargando) return <p>Cargando productos</p>
         if (error) return <p></p>
@@ -49,7 +47,7 @@ function Products() {
                 ))}
 
         </ul>
-                <Cart cart={cart} setCart={setCart} />
+               <Link to="/carrito"><Button text="Ir al carrito" /></Link>
     </>
   )
 }
