@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { Link} from 'react-router-dom'
-import Cart from './Cart';
 import Button from './Button';
+import Loading from './Loading';
 import { useAppContext } from '../context/AppContext';
 
 function Products() {
@@ -27,7 +27,7 @@ function Products() {
 
         
 
-        if (cargando) return <p>Cargando productos</p>
+        if (cargando) return (<Loading/>)
         if (error) return <p></p>
   return (
     <>

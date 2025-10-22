@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../context/AppContext'
+import { faFontAwesome } from '@fortawesome/free-brands-svg-icons'
 import Button from './Button'
 
 
@@ -21,14 +22,14 @@ function Navbar() {
       </div>
       <div>
         <h1 className='titulo'>TIENDA TLV</h1>
+        <h2 className='subtitulo'>Deli, fit & fresh</h2>
       </div>
         <ul>
            <li> <Link to={`/productos`}>  Productos</Link></li>
           <li >
           {isAuthenticated ? (
-            <div >
-              <span>Hola, {usuario.nombre}</span>
-              <span><Link to="/carrito">Carrito:({cart.length}</Link>)</span>
+            <div className='navCarrito'>
+              <Link to="/carrito">Carrito:({cart.length})</Link>
               <a onClick={cerrarSesion}> Cerrar sesión</a>
             
             </div>

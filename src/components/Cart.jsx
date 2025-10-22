@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 
 export default function Cart() {
-  const {cart, vaciarCarrito, isAuthenticated, eliminarDelCarrito} =useAppContext()
+  const {cart, vaciarCarrito, eliminarDelCarrito} =useAppContext()
   const navigate = useNavigate()
  
 
