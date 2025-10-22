@@ -1,10 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../context/AppContext'
-import { faFontAwesome } from '@fortawesome/free-brands-svg-icons'
-import Button from './Button'
-
-
 
 function Navbar() {
 
