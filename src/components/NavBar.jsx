@@ -5,6 +5,8 @@ import { useAppContext } from '../context/AppContext'
 function Navbar() {
 
   const {isAuthenticated, usuario, cart, cerrarSesion} = useAppContext()
+
+   const cantTotal = cart.reduce((sum, item) => sum + Number(item.cantidad), 0);
   return (
     <nav>
       <div className="divLogo">
@@ -25,7 +27,7 @@ function Navbar() {
           <li >
           {isAuthenticated ? (
             <div className='navCarrito'>
-              <Link to="/carrito">Carrito:({cart.length})</Link>
+              <Link to="/carrito">Carrito:<div className='cart-length'> {cantTotal} </div></Link>
               <a onClick={cerrarSesion}> Cerrar sesión</a>
             
             </div>

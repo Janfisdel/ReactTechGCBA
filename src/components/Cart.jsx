@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 
 export default function Cart() {
-  const {cart, vaciarCarrito, eliminarDelCarrito} =useAppContext()
+  const {cart, vaciarCarrito, eliminarDelCarrito, quitarCantidad, agregarCantidad} =useAppContext()
   const navigate = useNavigate()
  
 
@@ -12,7 +12,7 @@ export default function Cart() {
     navigate("/pagar", {state:{cart}}
     )}
 
-   const total = cart.reduce((sum, item) => sum + Number(item.price), 0);
+   const total = cart.reduce((sum, item) => sum + Number(item.price*item.cantidad), 0);
 
   return (
     <div>
@@ -23,7 +23,9 @@ export default function Cart() {
         <>
           {cart.map((item) => (
             <div key={item.id}>
-              <img src={item.img} alt={item.name} width="60" /> - {item.name} - ${Number(item.price)} 
+              <img src={item.img} alt={item.name} width="60" />  {item.name}  - 
+              ${Number(item.price*item.cantidad)}  <Button text="+" onClick={()=>{agregarCantidad(item.id)}} />   {item.cantidad}  <Button text="-" onClick={()=>{quitarCantidad(item.id)}} />
+               <Button text="Eliminar" onClick={()=>{eliminarDelCarrito(item.id)}} />             
             </div>
           ))}
 

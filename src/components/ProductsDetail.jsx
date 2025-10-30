@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useParams, useLocation } from "react-router-dom";
+import { useAppContext } from '../context/AppContext';
 import Button from './Button';
 
 function ProductsDetail() {
@@ -7,12 +8,13 @@ function ProductsDetail() {
     const location = useLocation()
     const product = location.state.product
 
+    const {agregarCarrito} = useAppContext()
+
     if (!product){
         return(
             <div>
                  <p>No se pudo cargar el producto</p>
         <Link to="/productos">
-          <button>Volver a Productos</button>
            <Button  text="Volver a Productos"/>
         </Link>
             </div>
@@ -26,7 +28,7 @@ function ProductsDetail() {
         <img className="product-img" src={product.img} alt={product.name}/>
         <p>{product.description}</p>
         <p>{product.price}</p>
-         <Button  text="Agregar al carrito"/>
+         <Button  text="Agregar al carrito" onClick={()=>agregarCarrito(product)}/>
         <Link to="/productos"><Button  text="Volver"/></Link>
     </div>
   )

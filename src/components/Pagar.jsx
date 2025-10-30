@@ -10,12 +10,9 @@ export default function Pagar() {
   const {usuario, cerrarSesion, cart, vaciarCarrito} = useAppContext()
 
   // Calculo del total
-  const total = cart.reduce(
-    (suma, producto) => suma + Number(producto.price),
-    0
-  );
-
-  // Función para finalizar compra
+      const total = cart.reduce((sum, item) => sum + Number(item.price*item.cantidad), 0);
+ 
+      // Función para finalizar compra
   const comprar = () => {
     alert("¡Compra realizada con éxito!");
     navigate("/productos");
@@ -34,11 +31,11 @@ export default function Pagar() {
       <div>
         <h2>Tu compra:</h2>
 
-        {cart.map((producto) => (
-          <div key={producto.id}>
-            <img src={producto.img} alt={producto.nombre} width="60" />
-            <span>{producto.name}</span>
-            <strong>${producto.price}</strong>
+        {cart.map((product) => (
+          <div key={product.id}>
+            <img src={product.img} alt={product.name} width="60" />
+            <span>{product.name} - cantidad:{product.cantidad} - </span>
+            <strong>${product.price*product.cantidad}</strong>
           </div>
         ))}
 
