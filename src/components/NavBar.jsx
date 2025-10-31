@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAppContext } from '../context/AppContext'
+import { useCartContext } from '../context/CartContext'
+import {useAuthContext} from '../context/AuthContext'
 
 function Navbar() {
 
-  const {isAuthenticated, usuario, cart, cerrarSesion} = useAppContext()
+  const {cart} = useCartContext()
+  const {isAuthenticated, cerrarSesion} =useAuthContext()
 
    const cantTotal = cart.reduce((sum, item) => sum + Number(item.cantidad), 0);
   return (
@@ -43,5 +45,3 @@ function Navbar() {
 }
 
 export default Navbar
-
-//Corregir el boton de carrito

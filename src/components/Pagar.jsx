@@ -1,18 +1,17 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useAppContext } from '../context/AppContext';
+import { useCartContext } from '../context/CartContext';
+import { useAuthContext } from '../context/AuthContext';
 import Button from './Button'
 
 export default function Pagar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const {usuario, cerrarSesion, cart, vaciarCarrito} = useAppContext()
+  const {cart, vaciarCarrito, total} = useCartContext()
+  const {usuario, cerrarSesion} =useAuthContext()
 
-  // Calculo del total
-      const total = cart.reduce((sum, item) => sum + Number(item.price*item.cantidad), 0);
- 
-      // Función para finalizar compra
+  // Función para finalizar compra
   const comprar = () => {
     alert("¡Compra realizada con éxito!");
     navigate("/productos");

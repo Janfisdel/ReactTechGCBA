@@ -9,13 +9,15 @@ import Cart from './components/Cart'
 import RutaProtegida from './components/RutaProtegida'
 import Pagar from './components/Pagar'
 import IniciarSesion from './components/IniciarSesion'
-import { AppProvider } from './context/AppContext'
+import { CartProvider } from './context/CartContext'
+import { AuthProvider } from './context/AuthContext'
 
 
 function App() {
  
   return (
-    <AppProvider>    
+    <AuthProvider>
+    <CartProvider>    
    <>
      <Navbar />
      <main>
@@ -35,7 +37,8 @@ function App() {
      
     <Footer/>
    </>
-   </AppProvider>
+   </CartProvider>
+   </AuthProvider>
   )
 }
 

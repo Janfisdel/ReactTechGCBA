@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Button from './Button'
-import { useAppContext } from '../context/AppContext'
+import { useAuthContext } from '../context/AuthContext'
 
 function IniciarSesion() {
     const navigate = useNavigate()
     const ubicacion = useLocation()
 
-    const {setIsAuthenticated, setUsuario} = useAppContext()
+    const {isAuthenticated, setIsAuthenticated, setUsuario} = useAuthContext()
 
     const [formulario, setFormulario] = useState({nombre:'', email: ''})
 
@@ -16,7 +16,7 @@ function IniciarSesion() {
         if(formulario.nombre && formulario.email){
             setIsAuthenticated(true)
             setUsuario(formulario)
-            
+            console.log(isAuthenticated)
             if (ubicacion.state?.cart){
                 navigate('/pagar', {state:{cart: ubicacion.state.cart}})
             }else{

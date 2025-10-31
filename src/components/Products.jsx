@@ -2,14 +2,14 @@ import {useState, useEffect} from 'react'
 import { Link} from 'react-router-dom'
 import Button from './Button';
 import Loading from './Loading';
-import { useAppContext } from '../context/AppContext';
+import { useCartContext } from '../context/CartContext';
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   
-  const {agregarCarrito} = useAppContext()
+  const {agregarCarrito} = useCartContext()
 
   useEffect( ()=>{
     fetch("https://68d876bf2144ea3f6da823e1.mockapi.io/api/tiendaTLV")

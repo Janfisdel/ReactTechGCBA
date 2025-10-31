@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useParams, useLocation } from "react-router-dom";
-import { useAppContext } from '../context/AppContext';
+import { useCartContext } from '../context/CartContext';
 import Button from './Button';
 
 function ProductsDetail() {
@@ -8,7 +8,7 @@ function ProductsDetail() {
     const location = useLocation()
     const product = location.state.product
 
-    const {agregarCarrito} = useAppContext()
+    const {agregarCarrito} = useCartContext()
 
     if (!product){
         return(
