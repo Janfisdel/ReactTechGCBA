@@ -1,23 +1,41 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState, useEffect } from "react"
 
+//crear contexto de autenticacion
 export const AuthContext = createContext()
 
+//Proveedor de autenticacion
 export function AuthProvider({children}){
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    //const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [usuario, setUsuario] = useState(null)
 
+    useEffect(()=>{
+        const token = localStorage.getItem("authToken")
+        const emailGuardado = localStorage.getItem("authEmail")
+        
+        if (token){
+            const username = token.replace("fake-token","")
+            setUsuario({nombre:username, email:emailGuardado || ""})
+        }
+    },[])
+
+    const iniciarSesion = (username) =>{
+        const token = `fake-token-${username}`
+        localStorage.setItem("authToken", token)
+
+        const emailGuardado = localStorage.getItem("authEmail")
+        setUsuario({nombre:username, email: emailGuardado || ""})
+    }
     const cerrarSesion =()=>{
-        setIsAuthenticated(false)
-        setUsuario({nombre:"", email:""})
-        vaciarCarrito()
+        localStorage.removeItem("authToken")
+        localStorage.removeItem("authEmail")
+        setUsuario(null)
     }
 
     const value={
         //Autenticacion
-        isAuthenticated,
-        setIsAuthenticated,
+        isAuthenticated: !!usuario,
         usuario,
-        setUsuario,
+        iniciarSesion,
         cerrarSesion,
     }
 
@@ -37,5 +55,3 @@ export function useAuthContext(){
     return context
 }
 
-
-//ver after 9 min 57

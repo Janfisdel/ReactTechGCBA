@@ -4,26 +4,31 @@ import Button from './Button'
 import { useAuthContext } from '../context/AuthContext'
 
 function IniciarSesion() {
+    const {iniciarSesion} = useAuthContext()
     const navigate = useNavigate()
     const ubicacion = useLocation()
-
-    const {isAuthenticated, setIsAuthenticated, setUsuario} = useAuthContext()
 
     const [formulario, setFormulario] = useState({nombre:'', email: ''})
 
     const manejanEnvio = (e)=>{
         e.preventDefault()
-        if(formulario.nombre && formulario.email){
-            setIsAuthenticated(true)
-            setUsuario(formulario)
-            console.log(isAuthenticated)
-            if (ubicacion.state?.cart){
-                navigate('/pagar', {state:{cart: ubicacion.state.cart}})
-            }else{
-                navigate('/productos')
-            }
-        }else {
-            alert('Complete todos los datos')
+
+        //verificacion de credenciales
+        if(formulario.nombre=== "admin" && formulario.email ==="1234@admin"){
+           localStorage.setItem("authEmail", formulario.email)
+           iniciarSesion("admin")
+           navigate("/dashboard")
+        }else if (formulario.nombre && formulario.email && formulario.nombre !== "admin") {
+           localStorage.setItem("authEmail", formulario.email)
+           iniciarSesion(formulario.nombre)
+
+           if(ubicacion.state?.cart){
+            navigate("/pagar", {state:{cart:ubicacion.state.cart}})
+           }else{
+            navigate("/productos")
+           }
+        }else{
+            alert ("Credenciales de administrador incorrectas.")
         }
     }
     
@@ -39,6 +44,14 @@ function IniciarSesion() {
             <Button type={"submit"} text="Iniciar sesión" />
             <Button onClick={()=>navigate('/productos')} text="Cancelar" />
         </form>
+
+           <p style={{ marginTop: "20px", fontSize: "12px", color: "#666" }}>
+        <strong>Credenciales de prueba para Dashboard:</strong>
+        <br />
+        Nombre: admin
+        <br />
+        Email: 1234@admin
+      </p>
    </div>
   )
 }

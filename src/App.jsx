@@ -11,6 +11,8 @@ import Pagar from './components/Pagar'
 import IniciarSesion from './components/IniciarSesion'
 import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './context/AuthContext'
+import Dashboard from './components/Dashboard'
+import FormProducto from './components/FormProducto'
 
 
 function App() {
@@ -25,13 +27,11 @@ function App() {
         <Route path="/" element={<Inicio />} />
         <Route path='/productos' element={<Products />} />
         <Route path='/productos/:categoria/:id' element={<ProductsDetail />} />
-       <Route path="/iniciar-sesion" element={<IniciarSesion />}/>
-       <Route path="/carrito" element={<Cart />}  />
-        <Route path="/pagar" element={ <RutaProtegida>
-                <Pagar/>
-            </RutaProtegida>
-          }
-        />
+        <Route path="/iniciar-sesion" element={<IniciarSesion />}/>
+        <Route path="/carrito" element={<Cart />}  />
+        <Route path="/pagar" element={ <RutaProtegida> <Pagar/> </RutaProtegida> }/>
+        <Route path="/Dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard/></RutaProtegida>}  />
+        <Route path="/agregarProducto" element={<RutaProtegida soloAdmin={true}><FormProducto/></RutaProtegida>}  />
      </Routes>
      </main>
      
