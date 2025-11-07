@@ -25,7 +25,7 @@ function ProductsDetail() {
     <div>
         <h2>{product.name}</h2>
         <br />
-        <img className="product-img" src={product.img} alt={product.name}/>
+        <img className="detail-img" src={product.img} alt={product.name}/>
         <p>{product.description}</p>
         <p>{product.price}</p>
          <Button  text="Agregar al carrito" onClick={()=>agregarCarrito(product)}/>

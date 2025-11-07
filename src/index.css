@@ -137,12 +137,16 @@ footer ul {
 }
 
 .product-img{
-  width: 15%;
-  height: 15%;
+  width: 50%;
+  height: auto;
   border-radius: 2px;
   
 }
 
+.detail-img{
+  width: 15%;
+  height: auto;
+}
 
 
 /* Inicio*/

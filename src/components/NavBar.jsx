@@ -1,15 +1,25 @@
 import React from 'react'
-import { Link, Links } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useCartContext } from '../context/CartContext'
 import {useAuthContext} from '../context/AuthContext'
 
 function Navbar() {
 
-  const {cart} = useCartContext()
+  const {cart, vaciarCarrito} = useCartContext()
   const {isAuthenticated, cerrarSesion, usuario} =useAuthContext()
+  const navigate =useNavigate()
+  const cantTotal = cart.reduce((sum, item) => sum + Number(item.cantidad), 0);
 
-   const cantTotal = cart.reduce((sum, item) => sum + Number(item.cantidad), 0);
-  return (
+   const manejarCerrarSesion = () => {
+    navigate("/productos");
+    
+    setTimeout(() => {
+      vaciarCarrito();
+      cerrarSesion();
+    }, 100);
+  };
+ 
+   return (
     <nav>
       <div className="divLogo">
         <Link to={`/`}>
@@ -36,7 +46,7 @@ function Navbar() {
            ):(        
             <div className='navCarrito'>
               <Link to="/carrito">Carrito:<div className='cart-length'> {cantTotal} </div></Link>
-              <a onClick={cerrarSesion}> Cerrar sesión</a>
+              <a onClick={manejarCerrarSesion}> Cerrar sesión</a>
             
             </div>
           ) : (
