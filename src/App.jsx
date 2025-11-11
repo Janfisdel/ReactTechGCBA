@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/NavBar'
 import Footer from './components/Footer'
@@ -13,7 +12,7 @@ import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './context/AuthContext'
 import Dashboard from './components/Dashboard'
 import FormProducto from './components/FormProducto'
-
+import EditarProductos from './components/editarProductos'
 
 function App() {
  
@@ -32,7 +31,8 @@ function App() {
         <Route path="/pagar" element={ <RutaProtegida> <Pagar/> </RutaProtegida> }/>
         <Route path="/Dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard/></RutaProtegida>}  />
         <Route path="/agregarProducto" element={<RutaProtegida soloAdmin={true}><FormProducto/></RutaProtegida>}  />
-     </Routes>
+        <Route path ="/editar-productos" element={<RutaProtegida soloAdmin={true}><EditarProductos /></RutaProtegida>}/>
+      </Routes>
      </main>
      
     <Footer/>

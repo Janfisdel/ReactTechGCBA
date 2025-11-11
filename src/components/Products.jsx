@@ -1,15 +1,20 @@
 import {useState, useEffect} from 'react'
-import { Link} from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import Button from './Button';
 import Loading from './Loading';
-import { useCartContext } from '../context/CartContext';
+import { useCartContext } from '../context/CartContext'
+import { useAuthContext} from '../context/AuthContext'
+
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-  
+  const navigate = useNavigate()
   const {agregarCarrito} = useCartContext()
+  const {usuario} = useAuthContext()
+
+  const esAdmin = usuario?.nombre ==="admin"
 
   useEffect( ()=>{
     fetch("https://68d876bf2144ea3f6da823e1.mockapi.io/api/tiendaTLV")
@@ -41,8 +46,18 @@ function Products() {
                 <p>$ {product.price} </p>
                 <br />
                 <img className="product-img" src={product.img} alt={product.name}/>
-                <Link to={`/productos/${product.category || 'sin-categoria'}/${product.id}`} state={{product}}><Button text="Más detalles" /></Link>
+                <Link to={`/productos/${product.category || 'sin-categoria'}/${product.id}`} state={{product}}>
+                  <Button text="Más detalles" />
+                </Link>
                <Button  text="Agregar al carrito" onClick={()=>agregarCarrito(product)}/>
+
+                {/* Botones solo para administradores */}
+                {esAdmin && (
+                  <div>
+                    <Button text="Editar" onClick={()=>navigate("/editar-productos",{state:{product:product}})}/>
+                  </div>
+
+                )}
                </li> 
                 ))}
 

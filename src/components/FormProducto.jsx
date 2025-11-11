@@ -94,7 +94,7 @@ function FormProducto() {
 
             <div>
                 <label>Precio: *</label>
-                <input type="text" name="price" value={product.price} onChange={manejarCambio} disabled={cargando} placeholder='Ingrese el precio del producto' />
+                <input type="number" name="price" value={product.price} onChange={manejarCambio} disabled={cargando} placeholder='Ingrese el precio del producto' />
                 {errores.price &&<p style={{ color: 'red', margin: '5px 0', fontSize: '14px' }}>{errores.price}</p>}
             </div>
 
