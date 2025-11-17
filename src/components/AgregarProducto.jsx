@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
+import Button from '../pages/Button'
 
-function FormProducto() {
+function AgregarProducto() {
     const [product, setProduct] = useState({name:'', price:'', description:'', category:'', img:''})
     const [errores, setErrores] = useState({})
     const [cargando, setCargando] = useState(false)
@@ -29,7 +30,7 @@ function FormProducto() {
             const precioNumerico = parseFloat(precioLimpio)
 
              if (!/^[\d.,]+$/.test(product.price.replace(/\./g, ''))) {
-                 errorCarga.price = 'Solo números, puntos o comas.';
+                 errorCarga.price = 'Solo números y comas.';
               } else if (isNaN(precioNumerico)) {
                     errorCarga.price = 'Precio no válido.';
               } else if (precioNumerico <= 0) {
@@ -57,7 +58,6 @@ function FormProducto() {
 
                 if(!respuesta.ok) throw new Error ('Error al agregar el producto.')
                 const data = await respuesta.json()
-                alert('Producto agregado correctamente')
                 return data
             }catch(error){
                 alert('Ocurrió un problema al agregar el producto')
@@ -73,8 +73,22 @@ function FormProducto() {
             setCargando(true)
             try{
                 await agregarProducto(product)
+                const agregarOtro= window.confirm('Producto agregado correctamente! \n\nDesea agregar otro producto?\n\n• "Aceptar": agrega otro producto\n• "Cancelar": Redirige a lista de productos')
+                
+                if(agregarOtro){
                 setProduct({name:'', price:'', description:'', category:'', img:''})
                 setErrores({})
+                }else{
+                   setTimeout(() => {
+                   navigate('/productos');
+                   }, 100);
+
+                   
+                }
+
+                setProduct({name:'', price:'', description:'', category:'', img:''})
+                setErrores({})
+                
             }catch(error){
                 console.error('Error:', error)
             }finally{
@@ -114,8 +128,7 @@ function FormProducto() {
                 {errores.description &&<p style={{ color: 'red', margin: '5px 0', fontSize: '14px' }}>{errores.description}</p>}
             </div>
 
-            <button type="submit" disabled={cargando}>{cargando ? 'Agregando...' : 'Agregar Producto'}  </button>
-
+            <Button type= "submit" disables= {cargando} text={cargando ? 'Agregando':'Agregar Producto'} />
             <p>(*) Campos obligatorios</p>
         </form>
       
@@ -123,4 +136,4 @@ function FormProducto() {
 }      
 
 
-export default FormProducto
+export default AgregarProducto

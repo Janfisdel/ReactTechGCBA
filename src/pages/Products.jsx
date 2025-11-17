@@ -55,6 +55,7 @@ function Products() {
                 {esAdmin && (
                   <div>
                     <Button text="Editar" onClick={()=>navigate("/editar-productos",{state:{product:product}})}/>
+                    <Button text="Eliminar" onClick={()=>navigate("/eliminar-productos",{state:{product:product}})}/>
                   </div>
 
                 )}
