@@ -5,7 +5,6 @@ export const AuthContext = createContext()
 
 //Proveedor de autenticacion
 export function AuthProvider({children}){
-    //const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [usuario, setUsuario] = useState(null)
 
     useEffect(()=>{
@@ -32,11 +31,11 @@ export function AuthProvider({children}){
     }
 
     const value={
-        //Autenticacion
         isAuthenticated: !!usuario,
         usuario,
         iniciarSesion,
         cerrarSesion,
+        esAdmin: usuario?.nombre ==="admin"
     }
 
     return(

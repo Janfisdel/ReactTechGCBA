@@ -22,9 +22,9 @@ function EliminarProducto() {
             }
             alert('Producto eliminado correctamente')
             navigate('/productos')
-            setTimeout(()=>{
-                window.location.reload()
-            },100)
+            // setTimeout(()=>{
+            //     window.location.reload()
+            // },100)
         }catch(error){
             console.error(error.message)
             alert('Ocurrió un problema al eliminar el producto')
