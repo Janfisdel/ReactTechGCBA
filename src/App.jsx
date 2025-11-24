@@ -11,11 +11,11 @@ import IniciarSesion from './pages/IniciarSesion'
 import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './context/AuthContext'
 import Dashboard from './pages/Dashboard'
-import AgregarProducto from './components/AgregarProducto'
-import EditarProductos from './components/EditarProductos'
 import EliminarProducto from './components/EliminarProducto'
 import { ProductsProvider } from './context/ProductsContext'
 import FormularioProducto from './components/FormularioProducto'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 function App() {
  
@@ -34,8 +34,6 @@ function App() {
         <Route path="/carrito" element={<Cart />}  />
         <Route path="/pagar" element={ <RutaProtegida> <Pagar/> </RutaProtegida> }/>
         <Route path="/Dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard/></RutaProtegida>}  />
-        {/* <Route path="/agregarProducto" element={<RutaProtegida soloAdmin={true}><AgregarProducto/></RutaProtegida>}  />
-        <Route path ="/editar-productos" element={<RutaProtegida soloAdmin={true}><EditarProductos /></RutaProtegida>}/> */}
         <Route path="/eliminar-productos" element={<RutaProtegida soloAdmin={true}><EliminarProducto /></RutaProtegida>}/>
         <Route path="/formulario-producto" element={<RutaProtegida><FormularioProducto/></RutaProtegida>}/>
 
