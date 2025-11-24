@@ -30,7 +30,7 @@ function Products() {
 
   return(
     <>
-    <ul id="lista-productos">
+    <ul id='product-list'>
         {products.map((product)=>(
           <ProductItem
           key={product.id}

@@ -128,7 +128,7 @@ function AgregarProducto() {
                 {errores.description &&<p style={{ color: 'red', margin: '5px 0', fontSize: '14px' }}>{errores.description}</p>}
             </div>
 
-            <Button type= "submit" disables= {cargando} text={cargando ? 'Agregando':'Agregar Producto'} />
+            <Button type= "submit" disabled= {cargando} text={cargando ? 'Agregando':'Agregar Producto'} />
             <p>(*) Campos obligatorios</p>
         </form>
       

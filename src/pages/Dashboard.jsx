@@ -19,7 +19,7 @@ function Dashboard() {
         <div>
             <h3>Acciones:</h3>
             <div>
-               <Link to="/agregarProducto"> <Button text="Agregar producto"/></Link>
+               <Link to="/formulario-producto"> <Button text="Agregar producto"/></Link>
                <Link to="/productos"><Button text="Ver/Editar todos los productos"/></Link>
             </div>
         </div>

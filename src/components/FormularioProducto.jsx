@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ProductsProvider, useProducts } from "../context/ProductsContext";
+import { useProducts } from "../context/ProductsContext";
+import Button from "../pages/Button"
 
 function FormularioProducto() {
     const navigate = useNavigate()
@@ -44,7 +45,7 @@ function FormularioProducto() {
 
         //limpiar errores
         if(errores[name]){
-            setErrores(prev=>({...prev, [name]}))
+            setErrores(prev=>({...prev, [name]:''}))
         }
     }
 
@@ -95,7 +96,7 @@ function FormularioProducto() {
         }
     }
 
-    const cancelarEdicion () =>{
+    const cancelarEdicion = () =>{
         if (modo ==="editar"){
             alert("Edición cancelada")
             navigate("/productos")
@@ -107,9 +108,37 @@ function FormularioProducto() {
 
         {modo ==="editar" && productoRecibido &&(
             <p>Editando:{productoRecibido.name}</p>
-            
         )}
-    {/* NO COMPROBE QUE FUNCIONA. FALTA AGREGAR AL RETURN DESDE LINEA 135 DEL EJEMPLO. Luego probar si funciona y seguir video */}
+
+        <div>
+            <label>Nombre: *</label>
+            <input type="text" name="name" value={product.name} onChange={manejarCambio} disabled={cargando} placeholder="Ingrese el nombre del producto" />
+            {errores.name && <p>{errores.name}</p>}
+        </div>
+        <div>
+            <label>Precio: *</label>
+            <input type="number" name="price" value={product.price} onChange={manejarCambio} disabled={cargando} placeholder="Ingrese el precio del producto" />
+            {errores.price && <p>{errores.price}</p>}
+        </div>
+        <div>
+            <label>Categoria: </label>
+            <input type="text" name="category" value={product.category} onChange={manejarCambio} disabled={cargando} placeholder="Ingrese la categoria del producto" />
+        </div>
+        <div>
+            <label>Imagen (URL): *</label>
+            <input type="text" name="img" value={product.img} onChange={manejarCambio} disabled={cargando} placeholder="Ingrese URL de la imagen del producto" />
+        </div>
+        <div>
+            <label>Descripción: *</label>
+            <input type="text" name="description" value={product.description} onChange={manejarCambio} disabled={cargando} placeholder="Mínimo 10 caracteres, máximo 200" />
+            {errores.description && <p>{errores.description}</p>}
+        </div>
+        <Button type={"submit"} disabled= {cargando} text={cargando ? (modo ==="editar" ? "Actualizando": "Agregando"): (modo ==="editar"? "Confirmar cambios":"Agregar producto")} />
+        {modo === "editar" && (
+            <Button onClick={()=>{cancelarEdicion()}} text="Cancelar" />
+        )}
+
+        <p>(*) Campos obligatorios</p>
     </form>
   )
 }
