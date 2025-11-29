@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCartContext } from '../context/CartContext'
 import {useAuthContext} from '../context/AuthContext'
+import { FaCartShopping } from "react-icons/fa6";
 
 function Navbar() {
 
@@ -40,12 +41,14 @@ function Navbar() {
           {isAuthenticated ? 
            usuario.nombre === "admin"?(
             <>
+            <span>Hola, {usuario.nombre}</span>
             <Link to="/dashboard">Dashboard</Link>
             <a onClick={cerrarSesion}> Cerrar sesión</a>
             </>
            ):(        
-            <div className='navCarrito'>
-              <Link to="/carrito">Carrito:<div className='cart-length'> {cantTotal} </div></Link>
+            <div>
+              <span>Hola, {usuario.nombre}</span>
+              <Link to="/carrito"><div className='cart-length'> {cantTotal} <FaCartShopping /></div></Link>
               <a onClick={manejarCerrarSesion}> Cerrar sesión</a>
             
             </div>
