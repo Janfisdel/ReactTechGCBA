@@ -8,13 +8,37 @@ import { useProducts } from '../context/ProductsContext';
 
 
 function Products() {
-  // const [products, setProducts] = useState([]);
-  // const [cargando, setCargando] = useState(true);
-  // const [error, setError] = useState(null);
   const {products, cargando, error} = useProducts()
   const navigate = useNavigate()
   const {agregarCarrito} = useCartContext()
   const {esAdmin} = useAuthContext()
+
+  useEffect(()=>{
+    document.title= "Tienda TLV - Deli, fit & fresh"
+
+    //Función para actualizar meta tags
+    const updateMetaTag = (name, content, attribute = 'name') =>{
+      let meta = document.querySelector(`meta[${attribute}="${name}"]`)
+      if(!meta){
+        meta = document.createElement('meta')
+        meta.setAttribute(attribute, name)
+        document.head.appendChild(meta)
+      }
+      meta.content = content
+    }
+
+    updateMetaTag('description', 'Visita nuestra tienda de productos saludables y frescos. Conoce nuestros productos para una vida mas fit')
+    updateMetaTag('keywords', 'Alimentos, bebidas, snack, saludable, fit, fresh')
+    updateMetaTag('author', 'Jana Fisdel')
+    updateMetaTag('robots', 'index, follow')
+
+    //Open Graph
+    updateMetaTag('og:title', 'Tienda TLV', 'property');
+    updateMetaTag('og:description', 'Visita nuestra tienda de productos saludables y frescos.', 'property');
+    updateMetaTag('og:type', 'website', 'property');
+    updateMetaTag('og:image', 'https://tudominio.com/logo.jpg', 'property');
+    updateMetaTag('og:url', window.location.href, 'property');
+  },[])
 
   const manejarEliminar = (product) =>{
     navigate('/eliminar-productos', {state:{product}} )
@@ -44,55 +68,6 @@ function Products() {
     </>
   )
 
-  // useEffect( ()=>{
-  //   fetch("https://68d876bf2144ea3f6da823e1.mockapi.io/api/tiendaTLV")
-  //       .then((respuesta)=>respuesta.json())
-  //       .then((data)=>{
-  //           setProducts(data)
-  //           setCargando(false)
-  //       })
-  //       .catch((error)=>{
-  //           {console.log("Error!,", error)}
-  //           setError("Hubo un problema al cargar los productos")
-  //           setCargando(false)
-  //       })
-  //       },[])
-
-        
-
-        
-  // return (
-  //   <>
-  //       <ul id='product-list'>
-  //           {products.map((product)=>(
-  //              <li key={product.id}>
-  //               <h2>{product.name} </h2>
-  //               <br />
-  //               <p>{product.description} </p>
-  //               <br />
-  //               <p>$ {product.price} </p>
-  //               <br />
-  //               <img className="product-img" src={product.img} alt={product.name}/>
-  //               <Link to={`/productos/${product.category || 'sin-categoria'}/${product.id}`} state={{product}}>
-  //                 <Button text="Más detalles" />
-  //               </Link>
-  //              <Button  text="Agregar al carrito" onClick={()=>agregarCarrito(product)}/>
-
-  //               {/* Botones solo para administradores */}
-  //               {esAdmin && (
-  //                 <div>
-  //                   <Button text="Editar" onClick={()=>navigate("/editar-productos",{state:{product:product}})}/>
-  //                   <Button text="Eliminar" onClick={()=>navigate("/eliminar-productos",{state:{product:product}})}/>
-  //                 </div>
-
-  //               )}
-  //              </li> 
-  //               ))}
-
-  //       </ul>
-  //              <Link to="/carrito"><Button text="Ir al carrito" /></Link>
-  //   </>
-  // )
 }
 
 const ProductItem =({product, esAdmin, onEditar, onEliminar, onAgregarCarrito})=>(

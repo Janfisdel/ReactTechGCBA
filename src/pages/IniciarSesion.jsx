@@ -16,11 +16,11 @@ function IniciarSesion() {
         //verificacion de credenciales
         if(formulario.nombre=== "admin" && formulario.email ==="1234@admin"){
            localStorage.setItem("authEmail", formulario.email)
-           iniciarSesion("admin")
+           iniciarSesion("admin", formulario.email)
            navigate("/dashboard")
         }else if (formulario.nombre && formulario.email && formulario.nombre !== "admin") {
            localStorage.setItem("authEmail", formulario.email)
-           iniciarSesion(formulario.nombre)
+           iniciarSesion(formulario.nombre, formulario.email)
 
            if(ubicacion.state?.cart){
             navigate("/pagar", {state:{cart:ubicacion.state.cart}})

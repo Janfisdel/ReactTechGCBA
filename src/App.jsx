@@ -16,6 +16,9 @@ import { ProductsProvider } from './context/ProductsContext'
 import FormularioProducto from './components/FormularioProducto'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import {ToastContainer} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import { Toast } from 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 function App() {
  
@@ -41,6 +44,7 @@ function App() {
      </main>
      
     <Footer/>
+    <ToastContainer position ="bottom-right" autoClose={3000} hideProgressBar={false} closeOnClick draggable pauseOnHover />
    </>
    </ProductsProvider>
    </CartProvider>

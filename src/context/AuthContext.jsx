@@ -6,23 +6,26 @@ export const AuthContext = createContext()
 //Proveedor de autenticacion
 export function AuthProvider({children}){
     const [usuario, setUsuario] = useState(null)
+    const [cargando, setCargando]=useState(true)
 
     useEffect(()=>{
         const token = localStorage.getItem("authToken")
         const emailGuardado = localStorage.getItem("authEmail")
         
         if (token){
-            const username = token.replace("fake-token","")
+            const username = token.replace("fake-token-","")
             setUsuario({nombre:username, email:emailGuardado || ""})
         }
+        setCargando(false)
     },[])
 
-    const iniciarSesion = (username) =>{
+    const iniciarSesion = (username, emailIngresado) =>{
         const token = `fake-token-${username}`
         localStorage.setItem("authToken", token)
+        localStorage.setItem("authEmail", emailIngresado)
 
-        const emailGuardado = localStorage.getItem("authEmail")
-        setUsuario({nombre:username, email: emailGuardado || ""})
+        // const emailGuardado = localStorage.getItem("authEmail")
+        setUsuario({nombre:username, email: emailIngresado || ""})
     }
     const cerrarSesion =()=>{
         localStorage.removeItem("authToken")
@@ -35,7 +38,8 @@ export function AuthProvider({children}){
         usuario,
         iniciarSesion,
         cerrarSesion,
-        esAdmin: usuario?.nombre ==="admin"
+        esAdmin: usuario?.nombre ==="admin",
+        cargando
     }
 
     return(
