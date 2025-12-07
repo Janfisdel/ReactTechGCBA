@@ -80,14 +80,14 @@ const ProductItem =({product, esAdmin, onEditar, onEliminar, onAgregarCarrito})=
                   <Button text="Más detalles" />
          </Link>
 
-        <Button text="Agregar al carrito" onClick={()=>onAgregarCarrito()} />
+        {/* <Button text="Agregar al carrito" onClick={()=>onAgregarCarrito()} /> */}
 
-        {esAdmin && (
+        {esAdmin ? (
           <div>
             <Button onClick={()=>onEditar()} text="Editar" />
             <Button onClick={()=>onEliminar()} text="Eliminar" />
           </div>
-        )}
+        ): <Button text="Agregar al carrito" onClick={()=>onAgregarCarrito()} /> }
 
     </li>
 )

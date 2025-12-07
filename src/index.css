@@ -7,7 +7,7 @@
 }
 
 main{
-  margin: 9rem;
+  margin: 7rem;
 }
 
 .boton {
@@ -19,25 +19,6 @@ main{
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.534);
   color:rgb(3, 19, 3);
   margin: 5px;
-}
-/*Navbar*/
-nav {
-  background-color:rgb(212, 125, 163);
-  padding: 1rem 2rem;
-  box-shadow: 0px 0px 2px 1px black;
-  display: flex;
-  position:fixed;
-  width: 100%;
-  top:0;
-  z-index: 999;
-  flex-wrap: wrap;
-
-  @media (max-width:768px) {
-    flex-direction: column;
-    text-align: center;
-    pad: 1rem;
-  }
-
 }
 
 nav ul {
@@ -57,7 +38,6 @@ nav li {
 nav a {
   color: rgb(0, 0, 0);
   text-decoration: none;
-  font-weight: 600;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   transition: all 0.3s ease;
@@ -65,15 +45,8 @@ nav a {
 
 nav a:hover {
   background-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
 }
 
-.divLogo{
-  display: inline-block;
-  width: auto;
-  margin: 0.2rem 0 0 0.2rem;
-  padding: 0.2rem 0 0 0.5rem;
-}
 .logo {
   width: 5rem;
   height: 5rem;
@@ -82,33 +55,43 @@ nav a:hover {
   float: left;
 }
 
+.nav-text{
+  font-weight: 800 !important;
+}
 .titulo{
-  position:absolute;
-  top:50%;
-  left:50%;
-   transform: translate(-80%, -50%);
-   font-size: 2rem;
-  
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.751);
 }
 
 .subtitulo{
-  position:absolute;
-  top:50%;
-  left:50%;
-   transform: translate(-110%, 50%);
-   font-size: 1rem;
-   font-weight: 100;
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 .cart-length{
   display: inline-block;
-  background-color: red;
   padding:0.6rem; 
   border-radius: 50%;
-  /* padding: 0.8rem; */
-  /* width: 1rem;
-  height: 1rem; */
-  
+  margin-right: 1rem;
+  margin-left:0.5rem;  
+}
+
+.contador{
+  position: absolute;
+  top: 35px;
+  right:14.6rem;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+
+
 }
 /*Footer*/
 footer {
@@ -128,7 +111,6 @@ footer ul {
 }
 
 /*Productos*/
-
 #product-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -150,14 +132,12 @@ footer ul {
   width: 50%;
   height: auto;
   border-radius: 2px;
-  
 }
 
 .detail-img{
   width: 15%;
   height: auto;
 }
-
 
 /* Inicio*/
   .carousel {
@@ -198,7 +178,6 @@ footer ul {
     75% { transform: translateX(0%); }
       100% { transform: translateX(0%); }
   }
-
 
   /*Efecto de cargando para la espera de los productos de API*/
   .loading{

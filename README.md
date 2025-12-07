@@ -11,6 +11,7 @@ git clone https://github.com/Janfisdel/ReactTechGCBA.git
 | React | 19.1.1 | Entorno de trabajo para Front end
 | React-router-dom | 7.9.4 | Enrutado dentro de la aplicación
 |Bootstrap | 5.3.8| Estilos predefinidos
+|Styled-components | 6.1.19 | 
 
 
 # Creado por ✒️

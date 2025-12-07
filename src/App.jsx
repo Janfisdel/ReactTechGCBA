@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import Title from './pages/Title'
 import Navbar from './pages/NavBar'
 import Footer from './pages/Footer'
 import Products from './pages/Products'
@@ -29,6 +30,7 @@ function App() {
    <>
      <Navbar />
      <main>
+      <Title />
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path='/productos' element={<Products />} />
