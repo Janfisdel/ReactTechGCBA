@@ -5,6 +5,11 @@ Proyecto realizado para el curso React JS Talento TECH del Gobierno de la ciudad
 git clone https://github.com/Janfisdel/ReactTechGCBA.git
 ```
 
+## Deploy en Vercel
+```sh
+https://react-tech-gcba.vercel.app/
+```
+
 ## _Librerias utilizadas_
 | Librería | Versión | Función
 | ------ | ------ |------|
