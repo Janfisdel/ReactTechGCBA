@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import { Link, useNavigate} from 'react-router-dom'
 import Button from './Button';
 import Loading from './Loading';
@@ -13,32 +13,25 @@ function Products() {
   const {agregarCarrito} = useCartContext()
   const {esAdmin} = useAuthContext()
 
-  useEffect(()=>{
-    document.title= "Tienda TLV - Deli, fit & fresh"
+  const [busqueda, setBusqueda] = useState("")
+  const [paginaActual, setPaginaActual] = useState(1)
 
-    //Función para actualizar meta tags
-    const updateMetaTag = (name, content, attribute = 'name') =>{
-      let meta = document.querySelector(`meta[${attribute}="${name}"]`)
-      if(!meta){
-        meta = document.createElement('meta')
-        meta.setAttribute(attribute, name)
-        document.head.appendChild(meta)
-      }
-      meta.content = content
-    }
+  const productosPorPagina = 6
+  const productosFiltrados = products.filter((product)=>
+    product.name.toLowerCase().includes(busqueda.toLocaleLowerCase()) || (product.category.toLowerCase().includes(busqueda.toLowerCase()))
+)
 
-    updateMetaTag('description', 'Visita nuestra tienda de productos saludables y frescos. Conoce nuestros productos para una vida mas fit')
-    updateMetaTag('keywords', 'Alimentos, bebidas, snack, saludable, fit, fresh')
-    updateMetaTag('author', 'Jana Fisdel')
-    updateMetaTag('robots', 'index, follow')
+  const indiceUltimoProducto = paginaActual * productosPorPagina
+  const indicePrimerProducto = indiceUltimoProducto- productosPorPagina
+  const productosActuales = productosFiltrados.slice(indicePrimerProducto, indiceUltimoProducto)
 
-    //Open Graph
-    updateMetaTag('og:title', 'Tienda TLV', 'property');
-    updateMetaTag('og:description', 'Visita nuestra tienda de productos saludables y frescos.', 'property');
-    updateMetaTag('og:type', 'website', 'property');
-    updateMetaTag('og:image', 'https://tudominio.com/logo.jpg', 'property');
-    updateMetaTag('og:url', window.location.href, 'property');
-  },[])
+  const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina)
+  const cambiarPagina = (numeroPagina) =>setPaginaActual(numeroPagina)
+
+  const manejarBusqueda = (e)=>{
+    setBusqueda(e.target.value)
+    setPaginaActual(1)
+  }
 
   const manejarEliminar = (product) =>{
     navigate('/eliminar-productos', {state:{product}} )
@@ -48,49 +41,84 @@ function Products() {
     navigate('/formulario-producto',{state:{product}})
   }
 
-
   if (cargando) return (<Loading/>)
   if (error) return <p></p>
 
   return(
     <>
-    <ul id='product-list'>
-        {products.map((product)=>(
-          <ProductItem
-          key={product.id}
-          product={product}
-          esAdmin={esAdmin}
-          onEditar={()=>manejarEditar(product)}
-          onEliminar={()=>manejarEliminar(product)}
-          onAgregarCarrito={()=>agregarCarrito(product)}/>
+    <div className='container mt-4'>
+      <div clasName ='row mb-4'>
+          <div className='col-12 col-md-6'>
+           <label className="form-label fw-bold">Buscar productos</label>
+           <input type="text" placeholder='Buscar por nombre o categoría' className='form-control' value={busqueda} onChange={manejarBusqueda} />
+            {busqueda && (
+             <small className='text-muted'>Mostrando {productosFiltrados.length} de {products.length} </small>
+            )}
+          </div>
+      </div>
+
+      <div className='row mt-5'>
+        {productosActuales.map((product)=>(
+          <div key={product.id} className="col-12 col-md-6 col-lg-4 mb-4" >
+            <div className='card h-100 p-2' style={{"background-color":"rgba(224, 141, 177, 0.45)"}}>
+              <h5 className='card-title'>{product.name} </h5>
+              <img src={product.img} alt={product.name} className='card-img-top p-2' style={{height:"200px", objectFit:"cover"}} />
+              <div className='card-body d-flex flex-column'>
+                
+                <p className='card-text flex-grow-1'>{product.description} </p>
+                <p className='card-text fw-bold'>${product.price} </p>
+                <div className='mt-auto'>
+                  <div className='d-grid gap-2'>
+                    <Link to={`/productos/${product.id}`} state={{product}}>
+                      <Button text="Más detalles" />
+                    </Link>
+                  </div>
+
+                  {esAdmin ? (
+                    <div className='mt-3 pt-3 border-top'>
+                      <div className='d-flex gap-2'>
+                          <Button onClick={()=>manejarEditar(product)} text="Editar" />
+                          <Button onClick={()=>manejarEliminar(product)} text="Eliminar" />
+                      </div> 
+                   </div>
+                  ): <Button text="Agregar al carrito" onClick={()=>agregarCarrito(product)} /> }
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
         ))}
-    </ul>
+
+        {/* Paginador  */}
+        {productosFiltrados.length> productosPorPagina &&(
+          <div className='d-flex justify-content-center my-4'>
+            {Array.from({length: totalPaginas}, (_, index)=>(
+              <button key={index + 1} className={`btn mx-1 ${paginaActual === index+1 ? "pagActual" : "pagOtras"}`}
+              onClick={()=>cambiarPagina(index + 1)}>{index +1} </button>
+            ))}
+          </div>
+        )}
+
+        {/* Información página actual */}
+        {productosFiltrados.length >0 &&(
+          <div className='text-center text-muted mt-2'>
+              <small>
+                Mostrando {productosActuales.length} productos
+                (página {paginaActual} de {totalPaginas})
+              </small>
+          </div>
+        )}
+      </div>
+       
+    </div>
+    
     </>
   )
 
 }
-
-const ProductItem =({product, esAdmin, onEditar, onEliminar, onAgregarCarrito})=>(
-    <li>
-        <h2>{product.name}</h2>
-        <p>Descripción: {product.description}</p>
-        <img src={product.img} alt={product.name} className="product-img" />
-        <p>Precio: ${product.price}</p>
-        <Link to={`/productos/${product.id}`} state={{product}}>
-                  <Button text="Más detalles" />
-         </Link>
-
-        {/* <Button text="Agregar al carrito" onClick={()=>onAgregarCarrito()} /> */}
-
-        {esAdmin ? (
-          <div>
-            <Button onClick={()=>onEditar()} text="Editar" />
-            <Button onClick={()=>onEliminar()} text="Eliminar" />
-          </div>
-        ): <Button text="Agregar al carrito" onClick={()=>onAgregarCarrito()} /> }
-
-    </li>
-)
 
 export default Products
 

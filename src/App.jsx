@@ -1,7 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
-import Title from './pages/Title'
-import Navbar from './pages/NavBar'
-import Footer from './pages/Footer'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Products from './pages/Products'
 import Inicio from './pages/Inicio'
 import ProductsDetail from './pages/ProductsDetail'
@@ -15,22 +12,21 @@ import Dashboard from './pages/Dashboard'
 import EliminarProducto from './components/EliminarProducto'
 import { ProductsProvider } from './context/ProductsContext'
 import FormularioProducto from './components/FormularioProducto'
+import Layout from './components/Layout'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import {ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import { Toast } from 'bootstrap/dist/js/bootstrap.bundle.min.js'
+
 
 function App() {
  
   return (
     <AuthProvider>
-    <CartProvider>    
-    <ProductsProvider>
+      <CartProvider>    
+        <ProductsProvider>
+          <Layout>  
    <>
-     <Navbar />
-     <main>
-      <Title />
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path='/productos' element={<Products />} />
@@ -41,13 +37,11 @@ function App() {
         <Route path="/Dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard/></RutaProtegida>}  />
         <Route path="/eliminar-productos" element={<RutaProtegida soloAdmin={true}><EliminarProducto /></RutaProtegida>}/>
         <Route path="/formulario-producto" element={<RutaProtegida><FormularioProducto/></RutaProtegida>}/>
-
-      </Routes>
-     </main>
-     
-    <Footer/>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>     
     <ToastContainer position ="bottom-right" autoClose={3000} hideProgressBar={false} closeOnClick draggable pauseOnHover />
    </>
+   </Layout>
    </ProductsProvider>
    </CartProvider>
    </AuthProvider>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useParams, useLocation } from "react-router-dom";
 import { useCartContext } from '../context/CartContext';
+import { useAuthContext } from '../context/AuthContext';
 import Button from './Button';
 
 function ProductsDetail() {
@@ -9,6 +10,15 @@ function ProductsDetail() {
     const product = location.state.product
 
     const {agregarCarrito} = useCartContext()
+    const {isAuthenticated, usuario} = useAuthContext()
+
+    const manejarEliminar = (product) =>{
+    navigate('/eliminar-productos', {state:{product}} )
+  }
+
+  const manejarEditar = (product) =>{
+    navigate('/formulario-producto',{state:{product}})
+  }
 
     if (!product){
         return(
@@ -22,7 +32,7 @@ function ProductsDetail() {
     }
 
   return (
-    <div className='container-md py-3'>
+    <div className='container-md '>
         <h2 className='mb-3'>{product.name}</h2>
         <div className='row align-items-start g-0 mb-4'>
           <div className='col-md-6'>
@@ -55,8 +65,14 @@ function ProductsDetail() {
           </div>
         </div>
         </div>
-       
-         <Button  text="Agregar al carrito" onClick={()=>agregarCarrito(product)}/>
+        {isAuthenticated ?
+        usuario.nombre === "admin"? (
+          <div className='mt-3 pt-3 border-top'>
+            <Button onClick={()=>manejarEditar(product)} text="Editar" />
+                          <Button onClick={()=>manejarEliminar(product)} text="Eliminar" />
+          </div>)
+          :(<Button text="Agregar al carrito" onClick={()=>agregarCarrito(product)} />
+        ):<></>}
         <Link to="/productos"><Button  text="Volver"/></Link>
     </div>
   )

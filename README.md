@@ -10,8 +10,10 @@ git clone https://github.com/Janfisdel/ReactTechGCBA.git
 | ------ | ------ |------|
 | React | 19.1.1 | Entorno de trabajo para Front end
 | React-router-dom | 7.9.4 | Enrutado dentro de la aplicación
-|Bootstrap | 5.3.8| Estilos predefinidos
-|Styled-components | 6.1.19 | 
+| React-toastify | 11.0.5 | Alertas en pantalla
+| React-icons | 5.5.0 | Iconos prediseñados
+| Bootstrap | 5.3.8| Estilos predefinidos de diseño y responsividad
+| Styled-components | 6.1.19 | Definición de estilos dentro de componentes
 
 
 # Creado por ✒️

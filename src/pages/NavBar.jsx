@@ -28,7 +28,6 @@ function Navbar() {
           src="https://res.cloudinary.com/janfis/image/upload/v1760717417/GCBAReact/TLVlogo_tmglgl.jpg"
           alt="logo"
         /> </Logo>
-          
         <button
           className="navbar-toggler"
           type="button"
