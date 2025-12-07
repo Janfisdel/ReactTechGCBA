@@ -33,7 +33,7 @@ function IniciarSesion() {
     }
     
   return (
-   <div>
+   <div className='container'>
         <h1>Iniciar sesión para continuar</h1>
         <form onSubmit={manejanEnvio}>
             <input type="text" placeholder='Nombre completo' 

@@ -43,7 +43,7 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarContent">
           <ul className="navbar-nav mb-2 mb-lg-0" >
             <li className="nav-item">
-              <Link to="/productos" className="nav-text nav-link">Productos</Link>
+              <Link to="/productos" className="nav-text">Productos</Link>
             </li>
           <li className="nav-item">
           {isAuthenticated ? 
